@@ -39,11 +39,7 @@ public class NarrationManager : MonoBehaviour
         current_player_choices_buttons = new List<Button>();
     }
 
-    void Start()
-    {
-        // initialize npc_sentences and player_choices here
-   
-    }
+ 
 
     private void InitializeNarration(NarrationSequence narrationSequence)
     {
