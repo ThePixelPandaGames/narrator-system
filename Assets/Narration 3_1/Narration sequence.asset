@@ -15,3 +15,6 @@ MonoBehaviour:
   npc_sentences:
   - Oh, Im sorry then..
   player_choices: []
+  myEvent:
+    m_PersistentCalls:
+      m_Calls: []

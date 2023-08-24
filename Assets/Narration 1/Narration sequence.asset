@@ -19,3 +19,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2fb0a55235d4a6a4e9a9a8c6b099e99c, type: 2}
   - {fileID: 11400000, guid: 80c584840435444458a94747ad6c98dc, type: 2}
   - {fileID: 11400000, guid: afd4e55b60941b74a85e27a45594bba1, type: 2}
+  myEvent:
+    m_PersistentCalls:
+      m_Calls: []

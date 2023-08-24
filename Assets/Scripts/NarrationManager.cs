@@ -26,6 +26,8 @@ public class NarrationManager : MonoBehaviour
     public static NarrationManager Instance { get => instance; set => instance = value; }
 
     public bool makeLettersAppearOneByOne = false;
+
+    private NarrationSequence current_narrationSequence;
     
     private void Awake()
     {
@@ -41,7 +43,7 @@ public class NarrationManager : MonoBehaviour
 
  
 
-    private void InitializeNarration(NarrationSequence narrationSequence)
+    private void InitializeNarration()
     {
         npc_sentences.Clear();
         player_choices.Clear();
@@ -50,16 +52,17 @@ public class NarrationManager : MonoBehaviour
 
         npc_text.text = "";
 
-        foreach (var npcSentence in narrationSequence.npc_sentences)
+        foreach (var npcSentence in current_narrationSequence.npc_sentences)
         {
             npc_sentences.Enqueue(npcSentence);
         }
-        foreach (var playerChoice in narrationSequence.player_choices)
+        foreach (var playerChoice in current_narrationSequence.player_choices)
         {
             player_choices.Add(playerChoice);
         }  
 
         UI.SetActive(true);
+      
     }
 
     public void StartNarration(NarrationSequence narrationSequence)
@@ -69,7 +72,9 @@ public class NarrationManager : MonoBehaviour
             EndNarration();
             return;
         }
-        InitializeNarration(narrationSequence);
+        current_narrationSequence = narrationSequence;
+
+        InitializeNarration();
 
         ContinueNarration();
 
@@ -118,6 +123,11 @@ public class NarrationManager : MonoBehaviour
     {
         //npc_text.text = "";
         UI.SetActive(false);
+
+        if(current_narrationSequence != null && current_narrationSequence.myEvent != null)
+        {
+            current_narrationSequence.callEvent();
+        }
 
         // disable all buttons and all UI etc.
     }

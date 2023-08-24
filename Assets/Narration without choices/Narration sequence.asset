@@ -15,3 +15,18 @@ MonoBehaviour:
   npc_sentences:
   - This a is dialogue without player choice
   player_choices: []
+  myEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4225073589146565536, guid: 2998797ed880a85448c2255be1474af7, type: 3}
+        m_TargetAssemblyTypeName: Test, Assembly-CSharp
+        m_MethodName: log
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
