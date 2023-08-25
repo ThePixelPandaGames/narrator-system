@@ -30,7 +30,8 @@ public class ContinueNarrationOnInput : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter)){
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
             try
             {
                 if (!NarrationManager.Instance.is_npc_talking && !NarrationManager.Instance.is_player_talking && allowContinuationOnEnter)
@@ -38,7 +39,8 @@ public class ContinueNarrationOnInput : MonoBehaviour, IPointerClickHandler
                     NarrationManager.Instance.ContinueNarration();
                 }
             }
-            catch (NullReferenceException e) {
+            catch (NullReferenceException e)
+            {
                 Debug.LogException(e);
                 Debug.LogError("NarrationManager possibly not set up in your scene/project. Check if you have one (and only one) instance.");
 

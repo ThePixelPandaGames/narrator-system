@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class NarrationManager : MonoBehaviour
@@ -38,7 +36,7 @@ public class NarrationManager : MonoBehaviour
     public bool is_player_talking = false;
 
     public GameObject continue_button;
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -51,7 +49,7 @@ public class NarrationManager : MonoBehaviour
         current_player_choices_buttons = new List<Button>();
     }
 
- 
+
 
     private void InitializeNarration()
     {
@@ -63,14 +61,14 @@ public class NarrationManager : MonoBehaviour
         npc_text.text = "";
         Debug.Log("text: " + npc_text.text);
 
-        foreach (var npcSentence in current_narrationSequence.npc_sentences)
+        foreach (var npcSentence in current_narrationSequence.NpcSentences)
         {
             npc_sentences.Enqueue(npcSentence);
         }
-        foreach (var playerChoice in current_narrationSequence.player_choices)
+        foreach (var playerChoice in current_narrationSequence.PlayerChoices)
         {
             player_choices.Add(playerChoice);
-        }  
+        }
 
         UI.SetActive(true);
 
@@ -78,12 +76,12 @@ public class NarrationManager : MonoBehaviour
         {
             continue_button.SetActive(false);
         }
-      
+
     }
 
     public void StartNarration(NarrationSequence narrationSequence)
     {
-        if(narrationSequence == null)
+        if (narrationSequence == null)
         {
             EndNarration();
             return;
@@ -93,8 +91,6 @@ public class NarrationManager : MonoBehaviour
         InitializeNarration();
 
         ContinueNarration();
-
- 
     }
 
     public void ContinueNarration()
@@ -132,7 +128,8 @@ public class NarrationManager : MonoBehaviour
                 // Handle narration completion here
                 EndNarration();
             }
-        }catch (NullReferenceException e)
+        }
+        catch (NullReferenceException e)
         {
             Debug.LogException(e);
             Debug.LogError("NarrationManager possibly not set up in your scene/project. Check if you have one (and only one) instance.");
@@ -145,8 +142,8 @@ public class NarrationManager : MonoBehaviour
     {
         Button button = Instantiate(player_choice_button_prefab, player_choice_spawn_pos[index].position, Quaternion.identity);
         current_player_choices_buttons.Add(button);
-        button.GetComponentInChildren<TextMeshProUGUI>().text = playerChoice.choice;
-        button.onClick.AddListener(delegate { StartNarration(playerChoice.next_narrationSequence); });
+        button.GetComponentInChildren<TextMeshProUGUI>().text = playerChoice.Choice;
+        button.onClick.AddListener(delegate { StartNarration(playerChoice.NextNarrationSequence); });
         button.transform.SetParent(UI.transform);
     }
 
@@ -155,7 +152,7 @@ public class NarrationManager : MonoBehaviour
         //npc_text.text = "";
         UI.SetActive(false);
         is_npc_talking = false;
-        if(current_narrationSequence != null && current_narrationSequence.myEvent != null)
+        if (current_narrationSequence != null && current_narrationSequence.MyEvent != null)
         {
             current_narrationSequence.callEvent();
         }
