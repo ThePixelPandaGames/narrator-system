@@ -28,6 +28,8 @@ public class NarrationManager : MonoBehaviour
     public bool makeLettersAppearOneByOne = false;
 
     private NarrationSequence current_narrationSequence;
+
+    public bool isInDialogue = false;
     
     private void Awake()
     {
@@ -62,6 +64,8 @@ public class NarrationManager : MonoBehaviour
         }  
 
         UI.SetActive(true);
+
+        isInDialogue = true;
       
     }
 
@@ -91,6 +95,7 @@ public class NarrationManager : MonoBehaviour
                 npc_text.text = npc_sentences.Dequeue();
             }else
             {
+                StopAllCoroutines();
                 StartCoroutine(Lettering(npc_sentences.Dequeue()));
             }
         }
@@ -123,6 +128,8 @@ public class NarrationManager : MonoBehaviour
     {
         //npc_text.text = "";
         UI.SetActive(false);
+
+        isInDialogue = false;
 
         if(current_narrationSequence != null && current_narrationSequence.myEvent != null)
         {
