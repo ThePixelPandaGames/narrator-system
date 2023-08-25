@@ -45,7 +45,6 @@ public class NarrationManager : MonoBehaviour
     private bool isPlayerTalking = false;
     private List<Button> currentPlayerChoiceButtons;
     private NarrationSequence currentNarrationSequence;
-    private string currentNpcName;
     private Queue<string> npcSentences;
     private List<PlayerChoice> playerChoices;
 
