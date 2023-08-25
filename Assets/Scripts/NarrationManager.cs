@@ -31,7 +31,7 @@ public class NarrationManager : MonoBehaviour
     private bool makeLettersAppearOneByOne = false;
 
     [SerializeField]
-    private bool DontDestroyOnLoad = false;
+    private bool dontDestroyOnSceneChange = false;
 
 
     // privates
@@ -62,7 +62,7 @@ public class NarrationManager : MonoBehaviour
         playerChoices = new List<PlayerChoice>();
         currentPlayerChoiceButtons = new List<Button>();
 
-        if(DontDestroyOnLoad) {
+        if(dontDestroyOnSceneChange) {
             DontDestroyOnLoad(this);
         }
     }
@@ -178,7 +178,7 @@ public class NarrationManager : MonoBehaviour
             currentNarrationSequence.callEvent();
         }
 
-        // disable all buttons and all UI etc.
+        DeleteAllPrevPlayerChoiceButtons();
     }
 
     private void DeleteAllPrevPlayerChoiceButtons()

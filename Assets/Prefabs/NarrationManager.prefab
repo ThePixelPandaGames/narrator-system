@@ -47,11 +47,8 @@ MonoBehaviour:
   letteringSpeed: 0.01
   npcText: {fileID: 0}
   continueButton: {fileID: 0}
-  playerChoiceButtonPrefab: {fileID: 1486860035962831715, guid: d9be914e5af9b354881b0a944de5985d, type: 3}
+  playerChoiceButtonPrefab: {fileID: 0}
   UI: {fileID: 0}
-  playerChoiceSpawnPos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  playerChoiceSpawnPos: []
   makeLettersAppearOneByOne: 1
   DontDestroyOnLoad: 1

@@ -563,13 +563,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1732959559}
     - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
+      propertyPath: playerChoiceButtonPrefab
+      value: 
+      objectReference: {fileID: 1486860035962831715, guid: d9be914e5af9b354881b0a944de5985d, type: 3}
+    - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
       propertyPath: makeLettersAppearOneByOne
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
+      propertyPath: playerChoiceSpawnPos.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
       propertyPath: playerChoiceSpawnPos.Array.data[0]
       value: 
-      objectReference: {fileID: 1462241444}
+      objectReference: {fileID: 817130060}
     - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
       propertyPath: playerChoiceSpawnPos.Array.data[1]
       value: 
@@ -577,7 +585,7 @@ PrefabInstance:
     - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
       propertyPath: playerChoiceSpawnPos.Array.data[2]
       value: 
-      objectReference: {fileID: 817130060}
+      objectReference: {fileID: 1462241444}
     - target: {fileID: 6897249194304363850, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
       propertyPath: m_Name
       value: Narration Manager
