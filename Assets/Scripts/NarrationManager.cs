@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class NarrationManager : MonoBehaviour
 {
+    [SerializeField]
+    float letteringSpeed = 0.2f;
+
     private Queue<string> npc_sentences;
     private List<PlayerChoice> player_choices;
 
@@ -29,7 +32,11 @@ public class NarrationManager : MonoBehaviour
 
     private NarrationSequence current_narrationSequence;
 
-    public bool isInDialogue = false;
+    /// hide this in inspector
+    public bool is_npc_talking = false;
+    public bool is_player_talking = false;
+
+    public GameObject continue_button;
     
     private void Awake()
     {
@@ -53,6 +60,7 @@ public class NarrationManager : MonoBehaviour
         DeleteAllPrevPlayerChoiceButtons();
 
         npc_text.text = "";
+        Debug.Log("text: " + npc_text.text);
 
         foreach (var npcSentence in current_narrationSequence.npc_sentences)
         {
@@ -65,9 +73,10 @@ public class NarrationManager : MonoBehaviour
 
         UI.SetActive(true);
 
-        
-
-        isInDialogue = true;
+        if (makeLettersAppearOneByOne)
+        {
+            continue_button.SetActive(false);
+        }
       
     }
 
@@ -90,6 +99,9 @@ public class NarrationManager : MonoBehaviour
     public void ContinueNarration()
     {
         Debug.Log("next sentence!");
+        is_npc_talking = true;
+        is_player_talking = false;
+
         if (npc_sentences.Count > 0)
         {
             if (makeLettersAppearOneByOne == false)
@@ -108,6 +120,8 @@ public class NarrationManager : MonoBehaviour
 
                 int index = player_choices.IndexOf(playerChoice);
                 CreatePlayerChoiceButton(playerChoice, index);
+                is_player_talking = true;
+                is_npc_talking = false;
             }
         }
         else
@@ -115,6 +129,8 @@ public class NarrationManager : MonoBehaviour
             // Handle narration completion here
             EndNarration();
         }
+
+
     }
 
     private void CreatePlayerChoiceButton(PlayerChoice playerChoice, int index)
@@ -130,9 +146,7 @@ public class NarrationManager : MonoBehaviour
     {
         //npc_text.text = "";
         UI.SetActive(false);
-
-        isInDialogue = false;
-
+        is_npc_talking = false;
         if(current_narrationSequence != null && current_narrationSequence.myEvent != null)
         {
             current_narrationSequence.callEvent();
@@ -153,10 +167,16 @@ public class NarrationManager : MonoBehaviour
 
     IEnumerator Lettering(string sentence)
     {
-        foreach(char letter in sentence.ToCharArray())
+        npc_text.text = "";
+        continue_button.SetActive(false);
+        foreach (char letter in sentence.ToCharArray())
         {
             npc_text.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(letteringSpeed);
         }
+        Debug.Log("Finished Lettering");
+        // make continue button appear here
+        continue_button.SetActive(true);
+        is_npc_talking = false;
     }
 }

@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 603075862}
   - component: {fileID: 603075864}
   - component: {fileID: 603075863}
+  - component: {fileID: 603075865}
   m_Layer: 5
   m_Name: Narration Window
   m_TagString: Untagged
@@ -471,6 +472,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603075861}
   m_CullTransparentMesh: 1
+--- !u!114 &603075865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603075861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73346252f2e0f1949ae63bc482a8487f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowContinuationOnEnter: 1
 --- !u!1 &817130059
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,6 +1001,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 474164023}
     - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
+      propertyPath: letteringSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
+      propertyPath: continue_button
+      value: 
+      objectReference: {fileID: 1732959559}
+    - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
+      propertyPath: makeLettersAppearOneByOne
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946951680935209348, guid: 40694a4b2e6c0e54496a581c33c2441c, type: 3}
       propertyPath: player_choice_spawn_pos.Array.data[0]
       value: 
       objectReference: {fileID: 817130060}
@@ -1152,6 +1178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3321512997043751232, guid: da6daa61f5f470e498c7bcca0c8566bf, type: 3}
+      propertyPath: narrationSequence
+      value: 
+      objectReference: {fileID: 11400000, guid: dd97a386a99deb54d995ed6d3c9c5dd9, type: 2}
     - target: {fileID: 6396034323879506881, guid: da6daa61f5f470e498c7bcca0c8566bf, type: 3}
       propertyPath: m_Name
       value: Narrator
