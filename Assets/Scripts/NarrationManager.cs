@@ -82,7 +82,6 @@ public class NarrationManager : MonoBehaviour
         DeleteAllPrevPlayerChoiceButtons();
 
         npcText.text = "";
-        Debug.Log("text: " + npcText.text);
 
         foreach (var npcSentence in currentNarrationSequence.NpcSentences)
         {
@@ -106,7 +105,6 @@ public class NarrationManager : MonoBehaviour
     {
         if (narrationSequence == null)
         {
-            Debug.Log("HERE");
             EndNarration();
             return;
         }
@@ -150,9 +148,6 @@ public class NarrationManager : MonoBehaviour
             }
             else
             {
-                // Handle narration completion here
-                Debug.Log("HERE 2");
-
                 EndNarration();
             }
         }
@@ -176,8 +171,6 @@ public class NarrationManager : MonoBehaviour
 
     private void EndNarration()
     {
-        //npc_text.text = "";
-        Debug.Log("END");
         UI.SetActive(false);
         isNpcTalking = false;
         if (currentNarrationSequence != null && currentNarrationSequence.MyEvent != null)
@@ -207,8 +200,6 @@ public class NarrationManager : MonoBehaviour
             npcText.text += letter;
             yield return new WaitForSeconds(letteringSpeed);
         }
-        Debug.Log("Finished Lettering");
-        // make continue button appear here
         continueButton.SetActive(true);
         isNpcTalking = false;
     }
