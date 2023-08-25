@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Narration sequence
   m_EditorClassIdentifier: 
   npc_sentences:
-  - Hello my friend!
+  - "Hello my friend! dhiuehgoivhervgfhjrdhkjlkjlkjfsdoioskjrnvglkrdhjvkjfdnlkvnjkjfdhvklfrvhgordjbvlkreighreklnmvkhd\xF6voijhlknokhoiuhrelkgjopierhgkjlregopihzoiasfhiufgiuhiuhihsifhhhjsgefhsrijfghiuwrhgijhlseekhfjrhglkjrhkjghskfhvkjsnfdjuvhrekjnvokhjxcoiubvgkjyfd\xF6jiokgubvfkjjgkjsfdlnvbudgbvbibkjbkjbkjbsfkjvnrdzgvgdea\xF6kjbnlydvgaljfdbgibhg"
   - Greetings!
   player_choices:
   - {fileID: 11400000, guid: 2fb0a55235d4a6a4e9a9a8c6b099e99c, type: 2}
