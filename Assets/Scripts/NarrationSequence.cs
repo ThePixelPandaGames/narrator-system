@@ -9,6 +9,9 @@ public class NarrationSequence : ScriptableObject
     [SerializeField]
     private string[] npcSentences;
 
+    [SerializeField]
+    private string narratorName;
+
 
     [SerializeField]
     private PlayerChoice[] playerChoices;
@@ -24,7 +27,7 @@ public class NarrationSequence : ScriptableObject
     public string[] NpcSentences { get => npcSentences;}
     public PlayerChoice[] PlayerChoices { get => playerChoices;}
     public MyEvent MyEvent { get => myEvent;}
-
+    public string NarratorName { get => narratorName; }
 }
 
 [Serializable]

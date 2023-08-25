@@ -7,6 +7,7 @@ public class NarrationTrigger : MonoBehaviour
     private NarrationSequence narrationSequence;
 
 
+
     void Start()
     {
         try

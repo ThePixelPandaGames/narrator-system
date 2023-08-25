@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,9 @@ public class NarrationManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI npcText;
+
+    [SerializeField]
+    private TextMeshProUGUI npcName;
 
     [SerializeField]
     private GameObject continueButton;
@@ -41,6 +45,7 @@ public class NarrationManager : MonoBehaviour
     private bool isPlayerTalking = false;
     private List<Button> currentPlayerChoiceButtons;
     private NarrationSequence currentNarrationSequence;
+    private string currentNpcName;
     private Queue<string> npcSentences;
     private List<PlayerChoice> playerChoices;
 
@@ -48,8 +53,6 @@ public class NarrationManager : MonoBehaviour
     public static NarrationManager Instance { get => instance; set => instance = value; }
     public bool IsNpcTalking { get => isNpcTalking; }
     public bool IsPlayerTalking { get => isPlayerTalking; }
-
-
 
     private void Awake()
     {
@@ -83,6 +86,19 @@ public class NarrationManager : MonoBehaviour
 
         npcText.text = "";
 
+
+        if (currentNarrationSequence.NarratorName != "")
+        {
+            npcName.gameObject.SetActive(true);
+            npcName.text = currentNarrationSequence.NarratorName;
+        }
+        else
+        {
+            Debug.Log(currentNarrationSequence.NarratorName);
+            npcName.gameObject.SetActive(false);
+            npcName.text = "";
+        }
+
         foreach (var npcSentence in currentNarrationSequence.NpcSentences)
         {
             npcSentences.Enqueue(npcSentence);
@@ -98,7 +114,6 @@ public class NarrationManager : MonoBehaviour
         {
             continueButton.SetActive(false);
         }
-
     }
 
     public void StartNarration(NarrationSequence narrationSequence)
