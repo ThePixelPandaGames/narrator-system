@@ -129,6 +129,7 @@ public class NarrationManager : MonoBehaviour
                 if (makeLettersAppearOneByOne == false)
                 {
                     npcText.text = npcSentences.Dequeue();
+                    isNpcTalking = false;
                 }
                 else
                 {
