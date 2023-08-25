@@ -65,6 +65,8 @@ public class NarrationManager : MonoBehaviour
 
         UI.SetActive(true);
 
+        
+
         isInDialogue = true;
       
     }
