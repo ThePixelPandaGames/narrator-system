@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player Choice 2
   m_EditorClassIdentifier: 
   choice: What?
-  next_narrationSequence: {fileID: 11400000, guid: 677b3a972b48ecb4da8f0e7c19f89d70, type: 2}
+  nextNarrationSequence: {fileID: 11400000, guid: ea161a8164e9b5d428d1c7c79aa7e293, type: 2}

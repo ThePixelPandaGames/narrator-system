@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d16b346ec2594e93f76023ffeba87, type: 3}
   m_Name: Narration sequence
   m_EditorClassIdentifier: 
-  npc_sentences:
-  - You don't remember me?
-  - Are you sure we have never met?
-  player_choices:
+  npcSentences:
+  - what?
+  - Are u sure?
+  playerChoices:
   - {fileID: 11400000, guid: 2dda82bd74e63244ca9397426101fd4d, type: 2}
   - {fileID: 11400000, guid: 677786cbb7f071e48a2ca2c3d0ed803b, type: 2}
   - {fileID: 11400000, guid: 3d154341cc34fff4393e1cb09c51b2ca, type: 2}
+  myEvent:
+    m_PersistentCalls:
+      m_Calls: []

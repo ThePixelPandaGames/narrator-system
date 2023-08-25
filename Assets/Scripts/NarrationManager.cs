@@ -7,35 +7,49 @@ using UnityEngine.UI;
 
 public class NarrationManager : MonoBehaviour
 {
+    // inspectables
+
     [SerializeField]
-    float letteringSpeed = 0.2f;
+    private float letteringSpeed = 0.2f;
 
-    private Queue<string> npc_sentences;
-    private List<PlayerChoice> player_choices;
+    [SerializeField]
+    private TextMeshProUGUI npcText;
 
-    public TextMeshProUGUI npc_text;
+    [SerializeField]
+    private GameObject continueButton;
 
-    public Button player_choice_button_prefab;
-    public GameObject UI;
+    [SerializeField]
+    private Button playerChoiceButtonPrefab;
 
-    private List<Button> current_player_choices_buttons;
+    [SerializeField]
+    private GameObject UI;
 
-    public Transform[] player_choice_spawn_pos;
+    [SerializeField]
+    private Transform[] playerChoiceSpawnPos;
 
+    [SerializeField]
+    private bool makeLettersAppearOneByOne = false;
+
+    [SerializeField]
+    private bool DontDestroyOnLoad = false;
+
+
+    // privates
 
     private static NarrationManager instance;
+    private bool isNpcTalking = false;
+    private bool isPlayerTalking = false;
+    private List<Button> currentPlayerChoiceButtons;
+    private NarrationSequence currentNarrationSequence;
+    private Queue<string> npcSentences;
+    private List<PlayerChoice> playerChoices;
 
+    // accessors
     public static NarrationManager Instance { get => instance; set => instance = value; }
+    public bool IsNpcTalking { get => isNpcTalking; }
+    public bool IsPlayerTalking { get => isPlayerTalking; }
 
-    public bool makeLettersAppearOneByOne = false;
 
-    private NarrationSequence current_narrationSequence;
-
-    /// hide this in inspector
-    public bool is_npc_talking = false;
-    public bool is_player_talking = false;
-
-    public GameObject continue_button;
 
     private void Awake()
     {
@@ -44,37 +58,46 @@ public class NarrationManager : MonoBehaviour
             Instance = this;
         }
 
-        npc_sentences = new Queue<string>();
-        player_choices = new List<PlayerChoice>();
-        current_player_choices_buttons = new List<Button>();
+        npcSentences = new Queue<string>();
+        playerChoices = new List<PlayerChoice>();
+        currentPlayerChoiceButtons = new List<Button>();
+
+        if(DontDestroyOnLoad) {
+            DontDestroyOnLoad(this);
+        }
+    }
+
+    public bool NoOneIsTalking()
+    {
+        return (IsNpcTalking == false && isPlayerTalking == false); 
     }
 
 
 
     private void InitializeNarration()
     {
-        npc_sentences.Clear();
-        player_choices.Clear();
+        npcSentences.Clear();
+        playerChoices.Clear();
 
         DeleteAllPrevPlayerChoiceButtons();
 
-        npc_text.text = "";
-        Debug.Log("text: " + npc_text.text);
+        npcText.text = "";
+        Debug.Log("text: " + npcText.text);
 
-        foreach (var npcSentence in current_narrationSequence.NpcSentences)
+        foreach (var npcSentence in currentNarrationSequence.NpcSentences)
         {
-            npc_sentences.Enqueue(npcSentence);
+            npcSentences.Enqueue(npcSentence);
         }
-        foreach (var playerChoice in current_narrationSequence.PlayerChoices)
+        foreach (var playerChoice in currentNarrationSequence.PlayerChoices)
         {
-            player_choices.Add(playerChoice);
+            playerChoices.Add(playerChoice);
         }
 
         UI.SetActive(true);
 
         if (makeLettersAppearOneByOne)
         {
-            continue_button.SetActive(false);
+            continueButton.SetActive(false);
         }
 
     }
@@ -83,10 +106,11 @@ public class NarrationManager : MonoBehaviour
     {
         if (narrationSequence == null)
         {
+            Debug.Log("HERE");
             EndNarration();
             return;
         }
-        current_narrationSequence = narrationSequence;
+        currentNarrationSequence = narrationSequence;
 
         InitializeNarration();
 
@@ -97,35 +121,37 @@ public class NarrationManager : MonoBehaviour
     {
         try
         {
-            is_npc_talking = true;
-            is_player_talking = false;
+            isNpcTalking = true;
+            isPlayerTalking = false;
 
-            if (npc_sentences.Count > 0)
+            if (npcSentences.Count > 0)
             {
                 if (makeLettersAppearOneByOne == false)
                 {
-                    npc_text.text = npc_sentences.Dequeue();
+                    npcText.text = npcSentences.Dequeue();
                 }
                 else
                 {
                     StopAllCoroutines();
-                    StartCoroutine(Lettering(npc_sentences.Dequeue()));
+                    StartCoroutine(Lettering(npcSentences.Dequeue()));
                 }
             }
-            else if (player_choices.Count > 0)
+            else if (playerChoices.Count > 0)
             {
-                foreach (var playerChoice in player_choices)
+                foreach (var playerChoice in playerChoices)
                 {
 
-                    int index = player_choices.IndexOf(playerChoice);
+                    int index = playerChoices.IndexOf(playerChoice);
                     CreatePlayerChoiceButton(playerChoice, index);
-                    is_player_talking = true;
-                    is_npc_talking = false;
+                    isPlayerTalking = true;
+                    isNpcTalking = false;
                 }
             }
             else
             {
                 // Handle narration completion here
+                Debug.Log("HERE 2");
+
                 EndNarration();
             }
         }
@@ -140,8 +166,8 @@ public class NarrationManager : MonoBehaviour
 
     private void CreatePlayerChoiceButton(PlayerChoice playerChoice, int index)
     {
-        Button button = Instantiate(player_choice_button_prefab, player_choice_spawn_pos[index].position, Quaternion.identity);
-        current_player_choices_buttons.Add(button);
+        Button button = Instantiate(playerChoiceButtonPrefab, playerChoiceSpawnPos[index].position, Quaternion.identity);
+        currentPlayerChoiceButtons.Add(button);
         button.GetComponentInChildren<TextMeshProUGUI>().text = playerChoice.Choice;
         button.onClick.AddListener(delegate { StartNarration(playerChoice.NextNarrationSequence); });
         button.transform.SetParent(UI.transform);
@@ -150,11 +176,12 @@ public class NarrationManager : MonoBehaviour
     private void EndNarration()
     {
         //npc_text.text = "";
+        Debug.Log("END");
         UI.SetActive(false);
-        is_npc_talking = false;
-        if (current_narrationSequence != null && current_narrationSequence.MyEvent != null)
+        isNpcTalking = false;
+        if (currentNarrationSequence != null && currentNarrationSequence.MyEvent != null)
         {
-            current_narrationSequence.callEvent();
+            currentNarrationSequence.callEvent();
         }
 
         // disable all buttons and all UI etc.
@@ -163,25 +190,25 @@ public class NarrationManager : MonoBehaviour
     private void DeleteAllPrevPlayerChoiceButtons()
     {
 
-        foreach (var button in instance.current_player_choices_buttons)
+        foreach (var button in instance.currentPlayerChoiceButtons)
         {
             Destroy(button.gameObject);
         }
-        instance.current_player_choices_buttons.Clear();
+        instance.currentPlayerChoiceButtons.Clear();
     }
 
     IEnumerator Lettering(string sentence)
     {
-        npc_text.text = "";
-        continue_button.SetActive(false);
+        npcText.text = "";
+        continueButton.SetActive(false);
         foreach (char letter in sentence.ToCharArray())
         {
-            npc_text.text += letter;
+            npcText.text += letter;
             yield return new WaitForSeconds(letteringSpeed);
         }
         Debug.Log("Finished Lettering");
         // make continue button appear here
-        continue_button.SetActive(true);
-        is_npc_talking = false;
+        continueButton.SetActive(true);
+        isNpcTalking = false;
     }
 }

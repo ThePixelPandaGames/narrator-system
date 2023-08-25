@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8393983092060851816
 Transform:
   m_ObjectHideFlags: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2fcb85a15b3a64f93170036c7afc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  letteringSpeed: 0.01
   npc_text: {fileID: 0}
   player_choice_button_prefab: {fileID: 1486860035962831715, guid: d9be914e5af9b354881b0a944de5985d, type: 3}
   UI: {fileID: 0}
@@ -51,4 +52,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  makeLettersAppearOneByOne: 0
+  makeLettersAppearOneByOne: 1
+  is_npc_talking: 0
+  is_player_talking: 0
+  continue_button: {fileID: 0}

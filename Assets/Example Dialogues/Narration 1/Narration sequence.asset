@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d16b346ec2594e93f76023ffeba87, type: 3}
   m_Name: Narration sequence
   m_EditorClassIdentifier: 
-  npc_sentences:
-  - "Hello my friend! dhiuehgoivhervgfhjrdhkjlkjlkjfsdoioskjrnvglkrdhjvkjfdnlkvnjkjfdhvklfrvhgordjbvlkreighreklnmvkhd\xF6voijhlknokhoiuhrelkgjopierhgkjlregopihzoiasfhiufgiuhiuhihsifhhhjsgefhsrijfghiuwrhgijhlseekhfjrhglkjrhkjghskfhvkjsnfdjuvhrekjnvokhjxcoiubvgkjyfd\xF6jiokgubvfkjjgkjsfdlnvbudgbvbibkjbkjbkjbsfkjvnrdzgvgdea\xF6kjbnlydvgaljfdbgibhg"
-  - Greetings!
-  player_choices:
+  npcSentences:
+  - Hi my friend
+  - Greetings
+  playerChoices:
   - {fileID: 11400000, guid: 2fb0a55235d4a6a4e9a9a8c6b099e99c, type: 2}
   - {fileID: 11400000, guid: 80c584840435444458a94747ad6c98dc, type: 2}
   - {fileID: 11400000, guid: afd4e55b60941b74a85e27a45594bba1, type: 2}

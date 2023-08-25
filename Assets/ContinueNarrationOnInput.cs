@@ -14,7 +14,7 @@ public class ContinueNarrationOnInput : MonoBehaviour, IPointerClickHandler
     {
         try
         {
-            if (!NarrationManager.Instance.is_npc_talking && !NarrationManager.Instance.is_player_talking)
+            if (NarrationManager.Instance.NoOneIsTalking())
             {
                 NarrationManager.Instance.ContinueNarration();
             }
@@ -34,7 +34,7 @@ public class ContinueNarrationOnInput : MonoBehaviour, IPointerClickHandler
         {
             try
             {
-                if (!NarrationManager.Instance.is_npc_talking && !NarrationManager.Instance.is_player_talking && allowContinuationOnEnter)
+                if (NarrationManager.Instance.NoOneIsTalking() && allowContinuationOnEnter)
                 {
                     NarrationManager.Instance.ContinueNarration();
                 }
