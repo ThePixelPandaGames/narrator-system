@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -98,36 +99,43 @@ public class NarrationManager : MonoBehaviour
 
     public void ContinueNarration()
     {
-        Debug.Log("next sentence!");
-        is_npc_talking = true;
-        is_player_talking = false;
+        try
+        {
+            is_npc_talking = true;
+            is_player_talking = false;
 
-        if (npc_sentences.Count > 0)
-        {
-            if (makeLettersAppearOneByOne == false)
+            if (npc_sentences.Count > 0)
             {
-                npc_text.text = npc_sentences.Dequeue();
-            }else
-            {
-                StopAllCoroutines();
-                StartCoroutine(Lettering(npc_sentences.Dequeue()));
+                if (makeLettersAppearOneByOne == false)
+                {
+                    npc_text.text = npc_sentences.Dequeue();
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(Lettering(npc_sentences.Dequeue()));
+                }
             }
-        }
-        else if (player_choices.Count > 0)
-        {
-            foreach (var playerChoice in player_choices)
+            else if (player_choices.Count > 0)
             {
+                foreach (var playerChoice in player_choices)
+                {
 
-                int index = player_choices.IndexOf(playerChoice);
-                CreatePlayerChoiceButton(playerChoice, index);
-                is_player_talking = true;
-                is_npc_talking = false;
+                    int index = player_choices.IndexOf(playerChoice);
+                    CreatePlayerChoiceButton(playerChoice, index);
+                    is_player_talking = true;
+                    is_npc_talking = false;
+                }
             }
-        }
-        else
+            else
+            {
+                // Handle narration completion here
+                EndNarration();
+            }
+        }catch (NullReferenceException e)
         {
-            // Handle narration completion here
-            EndNarration();
+            Debug.LogException(e);
+            Debug.LogError("NarrationManager possibly not set up in your scene/project. Check if you have one (and only one) instance.");
         }
 
 

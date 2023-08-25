@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,9 +12,17 @@ public class ContinueNarrationOnInput : MonoBehaviour, IPointerClickHandler
     private bool allowContinuationOnEnter = false;
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!NarrationManager.Instance.is_npc_talking && !NarrationManager.Instance.is_player_talking)
+        try
         {
-            NarrationManager.Instance.ContinueNarration();
+            if (!NarrationManager.Instance.is_npc_talking && !NarrationManager.Instance.is_player_talking)
+            {
+                NarrationManager.Instance.ContinueNarration();
+            }
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.LogException(e);
+            Debug.LogError("NarrationManager possibly not set up in your scene/project. Check if you have one (and only one) instance.");
         }
     }
 
@@ -20,8 +30,19 @@ public class ContinueNarrationOnInput : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        if(!NarrationManager.Instance.is_npc_talking && !NarrationManager.Instance.is_player_talking && allowContinuationOnEnter && Input.GetKeyDown(KeyCode.KeypadEnter)) {
-            NarrationManager.Instance.ContinueNarration();
+        if (Input.GetKeyDown(KeyCode.KeypadEnter)){
+            try
+            {
+                if (!NarrationManager.Instance.is_npc_talking && !NarrationManager.Instance.is_player_talking && allowContinuationOnEnter)
+                {
+                    NarrationManager.Instance.ContinueNarration();
+                }
+            }
+            catch (NullReferenceException e) {
+                Debug.LogException(e);
+                Debug.LogError("NarrationManager possibly not set up in your scene/project. Check if you have one (and only one) instance.");
+
+            }
         }
     }
 }
