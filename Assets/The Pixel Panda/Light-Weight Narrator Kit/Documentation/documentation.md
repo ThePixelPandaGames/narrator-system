@@ -203,11 +203,11 @@ The **Continue Narration** is not a Scriptable Object either. It handles display
 
 ### 6.1 Support Channels
 
-We offer support through our Discord server, where you can connect with other users and get assistance from our team. https://discord.gg/DhbpSVGC.
+I offer support through our Discord server, where you can connect with other users and get assistance from our team. https://discord.gg/DhbpSVGC.
 
 ### 6.2 Contact Information
 
-For direct inquiries, you can contact us at toni.antonio.palumbo@gmail.com or visit our website at antoniopalumbo.com.
+For direct inquiries, you can contact me at toni.antonio.palumbo@gmail.com or visit my website at antoniopalumbo.com.
 
 ---
 
