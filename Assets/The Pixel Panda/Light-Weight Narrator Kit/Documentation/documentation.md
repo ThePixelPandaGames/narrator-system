@@ -138,9 +138,7 @@ Refer to the **Asset Components** section for details on configuring the Narrati
 
 See the included sample scenes for practical examples of using the Light-Weight Narration Kit.
 
-...
-
-...
+See scene **Example 1**.
 
 ## 4. API Reference
 
