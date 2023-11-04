@@ -29,7 +29,7 @@ namespace LightWeightNarrationTool
         [SerializeField]
         private Sprite npcImage;
 
-        public void callEvent()
+        public void CallEvent()
         {
             MyEvent.Invoke();
         }
