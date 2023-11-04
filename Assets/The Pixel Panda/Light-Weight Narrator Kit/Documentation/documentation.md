@@ -137,7 +137,7 @@ Refer to the **Asset Components** section for details on configuring the Narrati
 ### 3.3 Example Use Cases
 
 See the included sample scenes for practical examples of using the Light-Weight Narration Kit.
-The example is minimalistic, I am not a designer but a programmer LOL. Also, I used the **Fantasy Wooden GUI: Free** (https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811). To outline the dialogue UI.
+The example is taken from from a snippet of one of the games our team is currently working on. Credits for art and narration goes to Kiriuozoru -> https://kiriuozoru.itch.io/.
 
 See scene **Example 1**.
 

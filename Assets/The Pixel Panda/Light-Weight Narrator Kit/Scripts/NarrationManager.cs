@@ -93,6 +93,9 @@ namespace LightWeightNarrationTool
 
             npcText.text = "";
 
+            AddOrChangeNPCImage();
+
+
 
             if (currentNarrationSequence.NarratorName != "")
             {
@@ -198,7 +201,7 @@ namespace LightWeightNarrationTool
             isNpcTalking = false;
             if (currentNarrationSequence != null && currentNarrationSequence.MyEvent != null)
             {
-                currentNarrationSequence.callEvent();
+                currentNarrationSequence.CallEvent();
             }
 
             
