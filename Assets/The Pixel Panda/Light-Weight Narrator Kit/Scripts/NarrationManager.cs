@@ -40,6 +40,11 @@ namespace LightWeightNarrationTool
         private bool dontDestroyOnSceneChange = false;
 
 
+        // update v1.1
+        [SerializeField]
+        private GameObject imageContainer;
+
+
         // privates
 
         private static NarrationManager instance;
@@ -186,6 +191,7 @@ namespace LightWeightNarrationTool
             button.transform.SetParent(UI.transform);
         }
 
+        // update v1.1
         private void EndNarration()
         {
             UI.SetActive(false);
@@ -193,6 +199,16 @@ namespace LightWeightNarrationTool
             if (currentNarrationSequence != null && currentNarrationSequence.MyEvent != null)
             {
                 currentNarrationSequence.callEvent();
+            }
+
+            
+            if (currentNarrationSequence.PlayerChoices.Length == 0 && currentNarrationSequence.NextNarrationSequence != null)
+            {
+                StartNarration(currentNarrationSequence.NextNarrationSequence);
+            }
+            else if (currentNarrationSequence.PlayerChoices.Length > 0 && currentNarrationSequence.NextNarrationSequence != null)
+            {
+                throw new Exception("You can not have Player Choices AND another narration sequence follow after the end of this sequence.");
             }
 
             DeleteAllPrevPlayerChoiceButtons();
@@ -219,6 +235,21 @@ namespace LightWeightNarrationTool
             }
             continueButton.SetActive(true);
             isNpcTalking = false;
+        }
+
+
+        // update v1.1
+        private void AddOrChangeNPCImage()
+        {
+            if (currentNarrationSequence.NpcImage != null)
+            {
+                imageContainer.SetActive(true);
+                imageContainer.GetComponent<Image>().sprite = currentNarrationSequence.NpcImage;
+            }
+            else
+            {
+                imageContainer.SetActive(false);
+            }
         }
     }
 }
